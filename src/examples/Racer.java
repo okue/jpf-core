@@ -22,8 +22,8 @@ public class Racer implements Runnable {
 
     @Override
     public void run() {
-        doSomething(1001);                   // (1)
-        d = 0;                               // (2)
+        doSomething(1001);
+        d = 0;
     }
 
     public static void main(String[] args) {
@@ -31,8 +31,8 @@ public class Racer implements Runnable {
         Thread t = new Thread(racer);
         t.start();
 
-        doSomething(1000);                   // (3)
-        int c = 420 / racer.d;               // (4)
+        doSomething(1000);
+        int c = 420 / racer.d;
         System.out.println(c);
     }
 

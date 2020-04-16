@@ -16,8 +16,10 @@
  * limitations under the License.
  */
 
-public class DiningPhil {
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+public class DiningPhil {
     static class Fork {
     }
 
@@ -38,6 +40,7 @@ public class DiningPhil {
             synchronized (left) {
                 synchronized (right) {
                     // eat!
+                    log.info("tid={} eat", Thread.currentThread().getId());
                 }
             }
         }
@@ -45,11 +48,7 @@ public class DiningPhil {
 
     static int nPhilosophers = 6;
 
-    public static void main(String[] args) {
-        if (args.length > 0) {
-            nPhilosophers = Integer.parseInt(args[0]);
-        }
-
+    public static void main(String[] args) throws InterruptedException {
         //Verify.beginAtomic();
         Fork[] forks = new Fork[nPhilosophers];
         for (int i = 0; i < nPhilosophers; i++) {

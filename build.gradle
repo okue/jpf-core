@@ -9,7 +9,7 @@ repositories {
 
 buildscript {
     repositories {
-	maven {
+        maven {
             url "https://plugins.gradle.org/m2/"
         }
     }
@@ -18,7 +18,17 @@ buildscript {
     }
 }
 
+configurations {
+    examplesCompile.extendsFrom compile
+    examplesCompileOnly.extendsFrom compileOnly
+    examplesAnnotationProcessor.extendsFrom annotationProcessor
+}
 dependencies {
+    examplesCompile 'org.slf4j:slf4j-api:1.7.30'
+    examplesCompile 'ch.qos.logback:logback-classic:1.2.3'
+    examplesCompileOnly 'org.projectlombok:lombok:1.18.12'
+    examplesAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+
     testImplementation "junit:junit:4.12"
     testCompile "org.ow2.asm:asm:7.1"
 }
@@ -34,10 +44,10 @@ def gitDetails = versionDetails()
 
 ext.manifestCommonAttrbutes = manifest {
     attributes(
-        "Built-By": System.getProperty("user.name"),
-        "Implementation-Vendor": "NASA Ames Research Center",
-        "Specification-Version": gitDetails.lastTag,
-        "Implementation-Version": gitDetails.gitHashFull
+            "Built-By": System.getProperty("user.name"),
+            "Implementation-Vendor": "NASA Ames Research Center",
+            "Specification-Version": gitDetails.lastTag,
+            "Implementation-Version": gitDetails.gitHashFull
     )
 }
 
@@ -158,8 +168,8 @@ task createRunJpfJar(type: Jar) {
     }
     manifest {
         attributes(
-            "Implementation-Title": "Java Pathfinder core launch system",
-            "Main-Class": "gov.nasa.jpf.tool.RunJPF"
+                "Implementation-Title": "Java Pathfinder core launch system",
+                "Main-Class": "gov.nasa.jpf.tool.RunJPF"
         )
         from manifestCommonAttrbutes
     }
@@ -192,8 +202,8 @@ task createRunTestJar(type: Jar) {
     }
     manifest {
         attributes(
-            "Implementation-Title": "Java Pathfinder test launch system",
-            "Main-Class": "gov.nasa.jpf.tool.RunTest"
+                "Implementation-Title": "Java Pathfinder test launch system",
+                "Main-Class": "gov.nasa.jpf.tool.RunTest"
         )
         from manifestCommonAttrbutes
     }
