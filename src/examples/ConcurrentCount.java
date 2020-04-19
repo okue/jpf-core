@@ -9,37 +9,25 @@ public class ConcurrentCount {
 
     public static void main(String args[]) {
 
-        new Thread() {
-
-            @Override
-            public void run() {
-                while (count > 0) {
-                    if (lock.get()) continue;
-                    lock.set(true);
-                    decreaseCount();
-                    a++;
-                    lock.set(false);
-
-
-                }
+        new Thread(() -> {
+            while (count > 0) {
+                if (lock.get()) continue;
+                lock.set(true);
+                decreaseCount();
+                a++;
+                lock.set(false);
             }
-        }.start();
+        }).start();
 
-        new Thread() {
-
-            @Override
-            public void run() {
-                while (count > 0) {
-                    if (lock.get()) continue;
-                    lock.set(true);
-                    decreaseCount();
-                    b++;
-                    lock.set(false);
-
-
-                }
+        new Thread(() -> {
+            while (count > 0) {
+                if (lock.get()) continue;
+                lock.set(true);
+                decreaseCount();
+                b++;
+                lock.set(false);
             }
-        }.start();
+        }).start();
 
         while (count > 0) ;
         //System.out.println("a = " + a);

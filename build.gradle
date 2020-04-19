@@ -18,17 +18,7 @@ buildscript {
     }
 }
 
-configurations {
-    examplesCompile.extendsFrom compile
-    examplesCompileOnly.extendsFrom compileOnly
-    examplesAnnotationProcessor.extendsFrom annotationProcessor
-}
 dependencies {
-    examplesCompile 'org.slf4j:slf4j-api:1.7.30'
-    examplesCompile 'ch.qos.logback:logback-classic:1.2.3'
-    examplesCompileOnly 'org.projectlombok:lombok:1.18.12'
-    examplesAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
-
     testImplementation "junit:junit:4.12"
     testCompile "org.ow2.asm:asm:7.1"
 }
